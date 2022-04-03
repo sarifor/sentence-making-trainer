@@ -3,14 +3,14 @@ extends templates/layout
 block content
     if records
         table(border="0")
-            for i=0; records.length; i++
+            each record, index in records
                 div
                     tr
-                        td=i
-                        td=records[i].sentence
-                        td=records[i].translated
-                        td=records[i].source
-                        td=records[i].updated                        
+                        td=index+1
+                        td=record.sentence
+                        td=record.translated
+                        td=record.source
+                        td=record.updated                        
     else
         p="Data Missing"
 
