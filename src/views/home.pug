@@ -2,7 +2,14 @@ extends templates/layout
 
 block content
     if records
-        p=records
+        table(border="0")
+            each record in records
+                div
+                    tr
+                        td=record.sentence
+                        td=record.translated
+                        td=record.source
+                        td=record.updated                        
     else
         p="Data Missing"
 

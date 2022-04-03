@@ -8,16 +8,7 @@ export class RecordsController {
 
     @Get()
     @Render('home')
-    showAllRecords() {
-        const records: Record[] = [ // for test
-            {
-                sentence: "test1",
-                translated: "테스트1",
-                source: "https://yahoo.co.jp",
-                uploaded: new Date(),
-            },            
-        ]
-        return { records: records };
-        // return this.recordsService.showAllRecords();
+    showAllRecords(): any {
+        return this.recordsService.showAllRecords();
     };
 };

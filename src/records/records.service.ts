@@ -17,12 +17,12 @@ let records: Record[] = [
 ];
 
 interface Plans {
-    showAllRecords(): Record[];
+    showAllRecords(): any;
 };
 
 @Injectable()
 export class RecordsService implements Plans {
-    showAllRecords(): Record[] {
-        return records;
+    showAllRecords(): any {
+        return { records: records };
     };
 };
