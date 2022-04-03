@@ -8,7 +8,7 @@ export class RecordsController {
 
     @Get()
     @Render('home')
-    showAllRecords(): Record[] {
+    showAllRecords() {
         const records: Record[] = [ // for test
             {
                 sentence: "test1",
@@ -17,7 +17,7 @@ export class RecordsController {
                 uploaded: new Date(),
             },            
         ]
-        return records;
+        return { records: records };
         // return this.recordsService.showAllRecords();
     };
 };
