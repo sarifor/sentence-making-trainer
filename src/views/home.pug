@@ -2,7 +2,14 @@ extends templates/layout
 
 block content
     if records
-        table(border="0")
+        table(border="1")
+            div
+                tr
+                    td="No."
+                    td="Sentence"
+                    td="Translated"
+                    td="Source"
+                    td="Uploaded"        
             each record, index in records
                 div
                     tr
@@ -10,7 +17,7 @@ block content
                         td=record.sentence
                         td=record.translated
                         td=record.source
-                        td=record.updated                        
+                        td=record.uploaded
     else
         p="Data Missing"
 
