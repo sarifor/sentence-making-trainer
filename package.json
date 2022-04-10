@@ -5,6 +5,13 @@
   "author": "",
   "private": true,
   "license": "UNLICENSED",
+  "engines" : {
+    "node": "12.1.0",
+    "npm": "6.9.0"
+  },
+  "os": [
+    "win64"
+  ],  
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
