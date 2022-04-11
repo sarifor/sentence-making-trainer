@@ -1,24 +1,38 @@
 extends templates/layout
 
 block content
-    if records
-        table(border="1")
-            div
-                tr
-                    td="No."
-                    td="Sentence"
-                    td="Translated"
-                    td="Source"
-                    td="Uploaded"        
-            each record, index in records
-                div
-                    tr
-                        td=index+1
-                        td=record.sentence
-                        td=record.translated
-                        td=record.source
-                        td=record.uploaded
-    else
-        p="Data Missing"
-
+    div.table
+        div.row
+            div.cell
+                h4="No."
+            div.cell
+                h4="Sentence"
+            div.cell
+                h4="Translated"
+            div.cell
+                h4="Source"
+            div.cell
+                h4="Uploaded"
+        div.row
+            div.cell
+                h4="1"
+            div.cell
+                h4="test1"
+            div.cell
+                h4="테스트1"
+            div.cell
+                h4="https://yahoo.co.jp"
+            div.cell
+                h4="Mon Apr 11 2022 16:22:01 GMT+0900 (GMT+09:00)"
+        div.row
+            div.cell
+                h4="2"
+            div.cell
+                h4="test2"
+            div.cell
+                h4="테스트2"
+            div.cell
+                h4="https://yahoo.co.uk"
+            div.cell
+                h4="Mon Apr 11 2022 16:22:01 GMT+0900 (GMT+09:00)"
 
