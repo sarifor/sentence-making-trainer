@@ -9,14 +9,14 @@ body {
 }
 
 .table {
+  background-color: black;
   display: grid;
-  grid-template-rows: repeat(3, 1fr);
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: 2px;
+  border: 2px solid black;
 
-  .row {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);  
-
-    .cell {
-    }
-  }
+  & > * {
+    background-color: white;
+  }  
 }
