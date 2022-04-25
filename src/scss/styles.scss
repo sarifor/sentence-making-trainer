@@ -6,7 +6,8 @@
 
 body {
   background-color: white;
-  padding: 0px 20px;
+  width: 55%;
+  margin: 0 auto;  
 }
 
 .table__top {
@@ -31,8 +32,9 @@ body {
   text-decoration: none;
   color: white;
   border: 1px solid black;
-  padding: 15px 40px;
   font-size: 22px;
+  text-align: center;
+  line-height: 50px;
 }
 
 .table {
@@ -54,11 +56,12 @@ body {
     grid-template-columns: 1fr 3fr;
   
     & > * {
-      background-color: pink;
       padding: 10px;
       margin: 20px;
 
-      // To second span:  border-bottom: 1px solid black;
+      &:nth-child(2) {
+        border-bottom: 1px solid black;
+      }
     }
   }
 
@@ -66,8 +69,10 @@ body {
     display: grid;
     grid-template-columns: 1fr 1fr;
 
+    padding: 5% 15%;
+
     & > * {
-      margin: 20px;
+      margin: 0% 10%;
     }
   }
 
