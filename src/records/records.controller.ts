@@ -11,4 +11,10 @@ export class RecordsController {
     showAllRecords(): any {
         return this.recordsService.showAllRecords();
     };
+
+    @Get('/upload')
+    @Render('upload')
+    uploadRecord(): any {
+        return this.recordsService.uploadRecord();
+    };
 };

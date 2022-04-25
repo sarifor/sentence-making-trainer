@@ -18,6 +18,7 @@ let records: Record[] = [
 
 interface Plans {
     showAllRecords(): any;
+    uploadRecord(): any;
 };
 
 @Injectable()
@@ -25,4 +26,9 @@ export class RecordsService implements Plans {
     showAllRecords(): any {
         return { records: records };
     };
+
+    uploadRecord(): any {
+        console.log("uploadRecord");
+        // return { records: records };
+    }
 };
