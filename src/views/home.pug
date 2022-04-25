@@ -11,26 +11,18 @@ block content
         div
             h4="Source"
         div
-            h4="Uploaded"
+            h4="Uploaded"    
 
-        div
-            h4="1"
-        div
-            h4="test1"
-        div
-            h4="테스트1"
-        div
-            h4="https://yahoo.co.jp"
-        div
-            h4="Mon Apr 11 2022 16:22:01 GMT+0900 (GMT+09:00)"
-        div
-            h4="2"
-        div
-            h4="test2"
-        div
-            h4="테스트2"
-        div
-            h4="https://yahoo.co.uk"
-        div
-            h4="Mon Apr 11 2022 16:22:01 GMT+0900 (GMT+09:00)"
+        if records
+            each record, index in records
+                div
+                    h4=index+1
+                div
+                    h4=record.sentence
+                div
+                    h4=record.translated
+                div
+                    h4=record.source
+                div
+                    h4=record.uploaded
 
