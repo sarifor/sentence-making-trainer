@@ -56,17 +56,14 @@ body {
     grid-template-columns: 1fr 3fr;
     grid-template-rows: 1fr 1fr;
   
+    input {
+      border: none;
+      border-bottom: 1px solid black;
+    }
+
     & > * {
       padding: 10px 10px 0px 10px;
       margin: 20px 20px 0px 20px;
-
-      &:nth-child(2) {
-        border-bottom: 1px solid black;
-      }
-
-      &:nth-child(4) {
-        border-bottom: 1px solid black;
-      }      
     }
   }
 
