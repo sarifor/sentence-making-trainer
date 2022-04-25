@@ -19,6 +19,7 @@ let records: Record[] = [
 interface Plans {
     showAllRecords(): any;
     uploadRecord(): any;
+    uploadRecordPost(): any;
 };
 
 @Injectable()
@@ -31,4 +32,9 @@ export class RecordsService implements Plans {
         console.log("uploadRecord");
         // return { records: records };
     }
+
+    uploadRecordPost(): any {
+        console.log("uploadRecordPost");
+        // return undefined;
+    };
 };

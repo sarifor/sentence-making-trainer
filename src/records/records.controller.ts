@@ -17,4 +17,10 @@ export class RecordsController {
     uploadRecord(): any {
         return this.recordsService.uploadRecord();
     };
+
+    @Post('/upload')
+    @Redirect('/records') // localhost:4000/records // somtimes not redirected
+    UploadRecordPost(): any { // will change method name 
+        return this.recordsService.uploadRecordPost();
+    };    
 };
