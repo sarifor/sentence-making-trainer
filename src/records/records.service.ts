@@ -31,7 +31,7 @@ export class RecordsService implements Plans {
     uploadRecord(): any {
         console.log("uploadRecord");
         // return { records: records };
-    }
+    };
 
     uploadRecordPost(): any {
         console.log("uploadRecordPost");
