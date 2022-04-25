@@ -45,5 +45,30 @@ body {
   & > * {
     background-color: #C6C6C6;
     padding: 10px;
-  }  
+  }
+}
+
+.form {
+  .form__input {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+  
+    & > * {
+      background-color: pink;
+      padding: 10px;
+      margin: 20px;
+
+      // To second span:  border-bottom: 1px solid black;
+    }
+  }
+
+  .form__buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    & > * {
+      margin: 20px;
+    }
+  }
+
 }
