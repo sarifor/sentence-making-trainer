@@ -14,13 +14,13 @@ export class RecordsController {
 
     @Get('/upload')
     @Render('upload')
-    uploadRecord(): any {
-        return this.recordsService.uploadRecord();
+    getUploadRecord(): any {
+        return this.recordsService.getUploadRecord();
     };
 
     @Post('/upload')
-    @Redirect('/records') // localhost:4000/records // somtimes not redirected
-    UploadRecordPost(): any { // will change method name 
-        return this.recordsService.uploadRecordPost();
+    @Redirect('/records')
+    postUploadRecord(): any {
+        return this.recordsService.postUploadRecord();
     };    
 };
