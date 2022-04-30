@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Record } from './entities/record.entity';
+import { UploadRecordDto } from './dto/upload-record.dto';
 
 let records: Record[] = [
     {
@@ -19,7 +20,7 @@ let records: Record[] = [
 interface Plans {
     showAllRecords(): any;
     getUploadRecord(): any;
-    postUploadRecord(): any;
+    postUploadRecord(record: UploadRecordDto): any;
 };
 
 @Injectable()
@@ -32,7 +33,8 @@ export class RecordsService implements Plans {
         console.log("getUploadRecord");
     };
 
-    postUploadRecord(): any {
-        console.log("postUploadRecord");
+    postUploadRecord(record: UploadRecordDto): any {
+        console.log("postUploadRecord");        
+        console.log(record);        
     };
 };

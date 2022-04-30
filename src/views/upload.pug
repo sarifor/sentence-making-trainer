@@ -7,11 +7,12 @@ block content
         a(href="/records").btn="List"
 
     div.form
-        div.form__input
-            label="Sentence:"
-            input(type="text")
-            label="Source:"
-            input(type="text")
-        div.form__buttons
-            a(href="#").btn="Upload"
-            a(href="#").btn="Cancel"            
+        form(method="POST" enctype="multipart/form-data")
+            div.form__input
+                    label="Sentence:"
+                    input(name="sentence", type="text")
+                    label="Source:"
+                    input(name="source", type="text")
+            div.form__buttons
+                    input(type="submit", value="Upload")
+                    input(type="submit", value="Cancel")

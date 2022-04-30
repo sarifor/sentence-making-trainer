@@ -1,5 +1,6 @@
 import { Controller, Get, Render, Param, Redirect, Post, Body } from '@nestjs/common';
 import { RecordsService } from './records.service';
+import { UploadRecordDto } from './dto/upload-record.dto';
 import { Record } from './entities/record.entity';
 
 @Controller('records')
@@ -20,7 +21,8 @@ export class RecordsController {
 
     @Post('/upload')
     @Redirect('/records')
-    postUploadRecord(): any {
-        return this.recordsService.postUploadRecord();
+    postUploadRecord(@Body() record: UploadRecordDto): any {
+        console.log(record);
+        return this.recordsService.postUploadRecord(record);
     };    
 };
