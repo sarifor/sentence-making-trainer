@@ -34,7 +34,10 @@ export class RecordsService implements Plans {
     };
 
     postUploadRecord(record: UploadRecordDto): any {
-        console.log("postUploadRecord");        
-        console.log(record);        
+        records.push({
+            translated: "テスト３",
+            uploaded: new Date(),
+            ...record
+        });
     };
 };

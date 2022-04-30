@@ -22,7 +22,6 @@ export class RecordsController {
     @Post('/upload')
     @Redirect('/records')
     postUploadRecord(@Body() record: UploadRecordDto): any {
-        console.log(record);
         return this.recordsService.postUploadRecord(record);
     };    
 };
