@@ -2,7 +2,6 @@ import { Controller, Get, Render, Param, Redirect, Post, Body } from '@nestjs/co
 import { RecordsService } from './records.service';
 import { UploadRecordDto } from './dto/upload-record.dto';
 import { UpdateRecordDto } from './dto/update-record.dto';
-import { Record } from './entities/record.entity';
 
 @Controller('records')
 export class RecordsController {
