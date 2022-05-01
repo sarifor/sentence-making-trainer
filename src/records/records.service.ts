@@ -1,8 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import axios from "axios";
 import { Record } from './entities/record.entity';
 import { UploadRecordDto } from './dto/upload-record.dto';
 import { UpdateRecordDto } from './dto/update-record.dto';
+
+const request = require("request");
 
 let records: Record[] = [
     {
@@ -40,15 +41,26 @@ export class RecordsService implements Plans {
         console.log("getUploadRecord");
     };
 
-    async postUploadRecord(record: UploadRecordDto) {
+    postUploadRecord(record: UploadRecordDto) {
         // Papago API로, record.sentence(영어)를 한국어로 번역
-        const baseURL = "https://weather.yahoo.co.jp/";
-        const client = axios.create({
-            baseURL,
-        });
+        const api_url = "https://openapi.naver.com/v1/papago/n2mt";
+        const client_id = process.env.CLIENT_ID;
+        const client_secret = process.env.CLIENT_SECRET;
+        const query = "Hungry!";
 
-        const response = await client.get(`/weather`);
-        console.log(response);
+        const options = {
+            url: api_url,
+            form: { source: "en", target: "ko", text: query },
+            headers: { "X-Naver-Client-Id": client_id, "X-Naver-Client-Secret": client_secret, },
+        };
+
+        request.post(options, function (error, response, body) {
+            if (!error && response.statusCode == 200) {
+                console.log(JSON.parse(body));
+            } else {
+                console.log("error = " + response.statusCode);
+            }
+        });
 
         records.push({
             translated: "テスト３",
