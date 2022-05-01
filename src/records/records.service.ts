@@ -50,7 +50,7 @@ export class RecordsService implements Plans {
         try {
             const { data } = await axios.post(
                 api_url,
-                { source: "en", target: "ko", text: query },
+                { source: "en", target: "ja", text: query },
                 { headers: { "X-Naver-Client-Id": client_id, "X-Naver-Client-Secret": client_secret, } }
             );
             const translated = data.message.result.translatedText;
