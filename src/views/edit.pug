@@ -20,6 +20,6 @@ block content
                         span(name="uploaded", type="text")=record.uploaded
                 div.form__buttons
                         input(type="submit", value="Update").btn
-                        input(type="submit", value="Delete").btn
+                        a(href=`/records/${record.index}/delete`).btn="Delete"
     else
         div="No Data"

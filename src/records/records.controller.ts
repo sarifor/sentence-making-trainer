@@ -37,4 +37,9 @@ export class RecordsController {
         return this.recordsService.postEditRecord(index, record);
     };    
 
+    @Get('/:index/delete')
+    @Redirect('/records')
+    getDeleteRecord(@Param('index') index: number): any {
+        return this.recordsService.getDeleteRecord(index);
+    };
 };

@@ -26,6 +26,7 @@ interface Plans {
     postUploadRecord(record: UploadRecordDto): any;
     getEditRecord(index: number): any;
     postEditRecord(index: number, record: UpdateRecordDto): any;
+    getDeleteRecord(index: number): any;
 };
 
 @Injectable()
@@ -59,5 +60,11 @@ export class RecordsService implements Plans {
         
         records = otherRecords; // 이 부분 때문에 const records라고 선언할 수 없는 것. 변수값 재할당은 let, var만 가능
         records.push({ ...originalRecord, ...record});
+    };
+
+    getDeleteRecord(index: number) {
+        const otherRecords: Record[] = records.filter(item => item.index != index);
+        
+        records = otherRecords;
     };
 };
