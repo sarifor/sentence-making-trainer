@@ -19,9 +19,9 @@ block content
             h4="Uploaded"    
 
         if records
-            each record, index in records
+            each record in records
                 div
-                    a(href=`/records/${index+1}/edit`)=index+1
+                    a(href=`/records/${record.index}/edit`)=record.index
                 div
                     h4=record.sentence
                 div

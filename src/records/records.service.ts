@@ -4,12 +4,14 @@ import { UploadRecordDto } from './dto/upload-record.dto';
 
 let records: Record[] = [
     {
+        index: 1,
         sentence: "test1",
         translated: "테스트1",
         source: "https://yahoo.co.jp",
         uploaded: new Date(),
     },
     {
+        index: 2,
         sentence: "test2",
         translated: "테스트2",
         source: "https://yahoo.co.uk",
@@ -36,6 +38,7 @@ export class RecordsService implements Plans {
     postUploadRecord(record: UploadRecordDto): any {
         records.push({
             translated: "テスト３",
+            index: records.length + 1,
             uploaded: new Date(),
             ...record
         });
