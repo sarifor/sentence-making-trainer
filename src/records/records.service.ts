@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Record } from './entities/record.entity';
 import { UploadRecordDto } from './dto/upload-record.dto';
+import { UpdateRecordDto } from './dto/update-record.dto';
 
 let records: Record[] = [
     {
@@ -23,6 +24,8 @@ interface Plans {
     showAllRecords(): any;
     getUploadRecord(): any;
     postUploadRecord(record: UploadRecordDto): any;
+    getEditRecord(index: number): any;
+    postEditRecord(index: number, record: UpdateRecordDto): any;
 };
 
 @Injectable()
@@ -50,8 +53,12 @@ export class RecordsService implements Plans {
         return { record: record };
     };
 
-    postEditRecord(): any {
-        console.log("getPostRecord");
-    };    
+    postEditRecord(index: number, record: UpdateRecordDto): any {
+        const originalRecord: Record = records.find(item => item.index == index);
+        const otherRecords: Record[] = records.filter(item => item.index != index);
+        
+        records = otherRecords;
+        records.push({ ...originalRecord, ...record});
+    };
 
 };

@@ -1,6 +1,7 @@
 import { Controller, Get, Render, Param, Redirect, Post, Body } from '@nestjs/common';
 import { RecordsService } from './records.service';
 import { UploadRecordDto } from './dto/upload-record.dto';
+import { UpdateRecordDto } from './dto/update-record.dto';
 import { Record } from './entities/record.entity';
 
 @Controller('records')
@@ -33,8 +34,8 @@ export class RecordsController {
 
     @Post('/:index/edit')
     @Redirect('/records')
-    postEditRecord(): any {
-        return this.recordsService.postEditRecord();
+    postEditRecord(@Param('index') index: number, @Body() record: UpdateRecordDto): any {
+        return this.recordsService.postEditRecord(index, record);
     };    
 
 };
