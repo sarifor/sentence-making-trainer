@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import axios from "axios";
 import { Record } from './entities/record.entity';
 import { UploadRecordDto } from './dto/upload-record.dto';
 import { UpdateRecordDto } from './dto/update-record.dto';
@@ -39,7 +40,16 @@ export class RecordsService implements Plans {
         console.log("getUploadRecord");
     };
 
-    postUploadRecord(record: UploadRecordDto): any {
+    async postUploadRecord(record: UploadRecordDto) {
+        // Papago API로, record.sentence(영어)를 한국어로 번역
+        const baseURL = "https://yahoo.co.jp";
+        const client = axios.create({
+            baseURL,
+        });
+
+        const response = await client.get(`/weather`);
+        console.log(response);
+
         records.push({
             translated: "テスト３",
             index: records.length + 1,
