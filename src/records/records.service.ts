@@ -44,8 +44,8 @@ export class RecordsService implements Plans {
         });
     };
 
-    getEditRecord(id: number): any {
-        const record = records[id-1];
+    getEditRecord(index: number): any {
+        const record = records[index-1];
         console.log(record);
         return { record: record };
     };

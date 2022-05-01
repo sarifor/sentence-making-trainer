@@ -25,13 +25,13 @@ export class RecordsController {
         return this.recordsService.postUploadRecord(record);
     };    
 
-    @Get('/:id/edit')
+    @Get('/:index/edit')
     @Render('edit')
-    getEditRecord(@Param('id') id: number): any {
-        return this.recordsService.getEditRecord(id);
+    getEditRecord(@Param('index') index: number): any {
+        return this.recordsService.getEditRecord(index);
     };
 
-    @Post('/:id/edit')
+    @Post('/:index/edit')
     @Redirect('/records')
     postEditRecord(): any {
         return this.recordsService.postEditRecord();
