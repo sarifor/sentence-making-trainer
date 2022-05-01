@@ -45,7 +45,7 @@ export class RecordsService implements Plans {
     };
 
     getEditRecord(index: number): any {
-        const record = records[index-1];
+        const record: Record = records.find(item => item.index == index);
         console.log(record);
         return { record: record };
     };
