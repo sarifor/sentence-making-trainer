@@ -40,20 +40,23 @@ export class RecordsService implements Plans {
         console.log("getUploadRecord");
     };
 
-    postUploadRecord(record: UploadRecordDto) {
+    async postUploadRecord(record: UploadRecordDto) {
         // Papago API로, record.sentence(영어)를 한국어로 번역
         const api_url = "https://openapi.naver.com/v1/papago/n2mt";
         const client_id = process.env.CLIENT_ID;
         const client_secret = process.env.CLIENT_SECRET;
         const query = "Hungry!";
 
-        axios.post(
-            api_url,
-            { source: "en", target: "ko", text: query },
-            { headers: { "X-Naver-Client-Id": client_id, "X-Naver-Client-Secret": client_secret, } }
-        )
-        .then(({ data }) => console.log(data))
-        .catch((e) => console.log(e));
+        try {
+            const { data } = await axios.post(
+                api_url,
+                { source: "en", target: "ko", text: query },
+                { headers: { "X-Naver-Client-Id": client_id, "X-Naver-Client-Secret": client_secret, } }
+            );
+            console.log(data);
+        } catch (e) {
+            console.log(e);
+        };
 
         records.push({
             translated: "テスト３",
