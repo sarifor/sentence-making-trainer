@@ -2,8 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { Record } from './entities/record.entity';
 import { UploadRecordDto } from './dto/upload-record.dto';
 import { UpdateRecordDto } from './dto/update-record.dto';
-
-const request = require("request");
+import axios from "axios";
 
 let records: Record[] = [
     {
@@ -48,19 +47,13 @@ export class RecordsService implements Plans {
         const client_secret = process.env.CLIENT_SECRET;
         const query = "Hungry!";
 
-        const options = {
-            url: api_url,
-            form: { source: "en", target: "ko", text: query },
-            headers: { "X-Naver-Client-Id": client_id, "X-Naver-Client-Secret": client_secret, },
-        };
-
-        request.post(options, function (error, response, body) {
-            if (!error && response.statusCode == 200) {
-                console.log(JSON.parse(body));
-            } else {
-                console.log("error = " + response.statusCode);
-            }
-        });
+        axios.post(
+            api_url,
+            { source: "en", target: "ko", text: query },
+            { headers: { "X-Naver-Client-Id": client_id, "X-Naver-Client-Secret": client_secret, } }
+        )
+        .then(({ data }) => console.log(data))
+        .catch((e) => console.log(e));
 
         records.push({
             translated: "テスト３",
