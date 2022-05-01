@@ -42,7 +42,7 @@ export class RecordsService implements Plans {
 
     async postUploadRecord(record: UploadRecordDto) {
         // Papago API로, record.sentence(영어)를 한국어로 번역
-        const baseURL = "https://yahoo.co.jp";
+        const baseURL = "https://weather.yahoo.co.jp/";
         const client = axios.create({
             baseURL,
         });
