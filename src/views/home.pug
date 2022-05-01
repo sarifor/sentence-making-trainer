@@ -21,7 +21,7 @@ block content
         if records
             each record, index in records
                 div
-                    h4=index+1
+                    a(href=`/records/${index+1}/edit`)=index+1
                 div
                     h4=record.sentence
                 div
