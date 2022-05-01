@@ -40,4 +40,13 @@ export class RecordsService implements Plans {
             ...record
         });
     };
+
+    getEditRecord(): any {
+        console.log("getEditRecord");
+    };
+
+    postEditRecord(): any {
+        console.log("getPostRecord");
+    };    
+
 };

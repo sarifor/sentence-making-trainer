@@ -1,0 +1,22 @@
+extends templates/layout
+
+block content
+
+    div.table__top
+        h1.table__top__title="Edit"
+        a(href="/records").btn="List"
+
+    div.form
+        form(method="POST" enctype="application/x-www-form-urlencoded")
+            div.form__input
+                    label="Sentence:"
+                    input(name="sentence", type="text")
+                    label="Translated:"
+                    input(name="translated", type="text")                    
+                    label="Source:"
+                    input(name="source", type="text")
+                    label="Uploaded:"
+                    span(name="uploaded", type="text")="test"
+            div.form__buttons
+                    input(type="submit", value="Update").btn
+                    input(type="submit", value="Delete").btn

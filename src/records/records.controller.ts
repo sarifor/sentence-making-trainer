@@ -24,4 +24,17 @@ export class RecordsController {
     postUploadRecord(@Body() record: UploadRecordDto): any {
         return this.recordsService.postUploadRecord(record);
     };    
+
+    @Get('/1/edit')
+    @Render('edit')
+    getEditRecord(): any {
+        return this.recordsService.getEditRecord();
+    };
+
+    @Post('/1/edit')
+    @Redirect('/records')
+    postEditRecord(): any {
+        return this.recordsService.postEditRecord();
+    };    
+
 };

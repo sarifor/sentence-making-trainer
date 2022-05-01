@@ -61,6 +61,10 @@ body {
       border-bottom: 1px solid black;
     }
 
+    span {
+      border: none;
+    }
+
     & > * {
       padding: 10px 10px 0px 10px;
       margin: 20px 20px 0px 20px;
