@@ -45,7 +45,7 @@ export class RecordsService implements Plans {
         const api_url = "https://openapi.naver.com/v1/papago/n2mt";
         const client_id = process.env.CLIENT_ID;
         const client_secret = process.env.CLIENT_SECRET;
-        const query = "Hungry!";
+        const query = record.sentence;
 
         try {
             const { data } = await axios.post(
@@ -53,17 +53,17 @@ export class RecordsService implements Plans {
                 { source: "en", target: "ko", text: query },
                 { headers: { "X-Naver-Client-Id": client_id, "X-Naver-Client-Secret": client_secret, } }
             );
-            console.log(data);
+            const translated = data.message.result.translatedText;
+
+            records.push({
+                translated,
+                index: records.length + 1,
+                uploaded: new Date(),
+                ...record
+            });            
         } catch (e) {
             console.log(e);
         };
-
-        records.push({
-            translated: "テスト３",
-            index: records.length + 1,
-            uploaded: new Date(),
-            ...record
-        });
     };
 
     getEditRecord(index: number): any {
