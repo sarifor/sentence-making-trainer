@@ -9,6 +9,6 @@ async function bootstrap() {
   app.useStaticAssets(join(process.cwd(), '/dist/css')); // Path: http://localhost:4000/styles.css
   app.setBaseViewsDir(join(process.cwd(), '/src/views'));
   app.setViewEngine('pug');
-  await app.listen(4000);
+  await app.listen(80);
 }
 bootstrap();
