@@ -25,7 +25,7 @@ export class RecordsController {
         return this.recordsService.postUploadRecord(record);
     };    
 
-    @Get('/:index/edit')
+    /* @Get('/:index/edit')
     @Render('edit')
     getEditRecord(@Param('index') index: number): any {
         return this.recordsService.getEditRecord(index);
@@ -41,5 +41,5 @@ export class RecordsController {
     @Redirect('/records')
     getDeleteRecord(@Param('index') index: number): any {
         return this.recordsService.getDeleteRecord(index);
-    };
+    }; */
 };

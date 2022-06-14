@@ -3,8 +3,10 @@ import { Record } from './entities/record.entity';
 import { UploadRecordDto } from './dto/upload-record.dto';
 import { UpdateRecordDto } from './dto/update-record.dto';
 import axios from "axios";
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 
-let records: Record[] = [
+/* let records: Record[] = [
     {
         index: 1,
         sentence: "test1",
@@ -19,21 +21,26 @@ let records: Record[] = [
         source: "https://yahoo.co.uk",
         uploaded: new Date(),
     },    
-];
+]; */
 
 interface Plans {
     showAllRecords(): any;
-    getUploadRecord(): any;
-    postUploadRecord(record: UploadRecordDto): any;
-    getEditRecord(index: number): any;
-    postEditRecord(index: number, record: UpdateRecordDto): any;
-    getDeleteRecord(index: number): any;
+    // getUploadRecord(): any;
+    // postUploadRecord(record: UploadRecordDto): any;
+    // getEditRecord(index: number): any;
+    // postEditRecord(index: number, record: UpdateRecordDto): any;
+    // getDeleteRecord(index: number): any;
 };
 
 @Injectable()
 export class RecordsService implements Plans {
-    showAllRecords(): any {
-        return { records: records };
+    constructor(
+        @InjectRepository(Record)
+        private recordsRepository: Repository<Record>,
+    ) {}
+
+    showAllRecords(): Promise<Record[]> {
+        return this.recordsRepository.find();
     };
 
     getUploadRecord(): any {
@@ -55,18 +62,20 @@ export class RecordsService implements Plans {
             );
             const translated = data.message.result.translatedText;
 
-            records.push({
+            console.log("here");
+
+            return this.recordsRepository.insert({
                 translated,
-                index: records.length + 1,
+                // index: records.length + 1, // how to retrieve repository size?
                 uploaded: new Date(),
                 ...record
-            });            
+            });
         } catch (e) {
             console.log(e);
         };
     };
 
-    getEditRecord(index: number): any {
+    /* getEditRecord(index: number): any {
         const record: Record = records.find(item => item.index == index);
         console.log(record);
         return { record: record };
@@ -84,5 +93,5 @@ export class RecordsService implements Plans {
         const otherRecords: Record[] = records.filter(item => item.index != index);
         
         records = otherRecords;
-    };
+    }; */
 };
