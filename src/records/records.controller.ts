@@ -10,8 +10,12 @@ import { Record } from './entities/record.entity';
 export class RecordsController {
     constructor(private readonly recordsService: RecordsService) {};
 
-    @Query(returns => Record)
-    @Get()
+    @Query(returns => String)
+    hi() {
+        return 'hi';
+    }
+
+    /* @Get()
     @Render('home')
     showAllRecords(): any {
         return this.recordsService.showAllRecords();
@@ -45,5 +49,5 @@ export class RecordsController {
     @Redirect('/records')
     getDeleteRecord(@Param('index') index: number): any {
         return this.recordsService.getDeleteRecord(index);
-    };
+    }; */
 };

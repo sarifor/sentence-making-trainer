@@ -8,6 +8,7 @@ import { Record } from './records/entities/record.entity';
 import { ConfigModule } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
+import { join } from 'path';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
     }),
     GraphQLModule.forRoot<ApolloDriverConfig>({ // Playground: http://localhost:4000/graphql
       driver: ApolloDriver,
+      autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
     })
   ],
   controllers: [AppController],
