@@ -10,9 +10,9 @@ interface Plans {
     showAllRecords(): any;
     getUploadRecord(): any;
     postUploadRecord(record: UploadRecordDto): any;
-    // getEditRecord(index: number): any;
-    // postEditRecord(index: number, record: UpdateRecordDto): any;
-    // getDeleteRecord(index: number): any;
+    getEditRecord(index: number): any;
+    postEditRecord(index: number, record: UpdateRecordDto): any;
+    getDeleteRecord(index: number): any;
 };
 
 @Injectable()
@@ -59,23 +59,30 @@ export class RecordsService implements Plans {
         };
     };
 
-    /* getEditRecord(index: number): any {
-        const record: Record = records.find(item => item.index == index);
-        console.log(record);
-        return { record: record };
+    async getEditRecord(index: number): Promise<any> {
+        try {
+            const record: Record = await this.recordsRepository.findOne({
+                where: {
+                    index: index,
+                },
+            });
+            return { record: record };
+        } catch(e) {
+            console.log("No Data Found");
+        }
+    }
+
+    async postEditRecord(index: number, record: UpdateRecordDto): Promise<any> {
+        await this.recordsRepository.update({ index: index }, record); 
     };
 
-    postEditRecord(index: number, record: UpdateRecordDto): any {
-        const originalRecord: Record = records.find(item => item.index == index);
-        const otherRecords: Record[] = records.filter(item => item.index != index);
-        
-        records = otherRecords; // 이 부분 때문에 const records라고 선언할 수 없는 것. 변수값 재할당은 let, var만 가능
-        records.push({ ...originalRecord, ...record});
+    async getDeleteRecord(index: number) {
+        try {
+            await this.recordsRepository.delete({
+                index: index,
+            });
+        } catch(e) {
+            console.log("No Data Deleted");
+        }
     };
-
-    getDeleteRecord(index: number) {
-        const otherRecords: Record[] = records.filter(item => item.index != index);
-        
-        records = otherRecords;
-    }; */
 };
