@@ -2,11 +2,15 @@ import { Controller, Get, Render, Param, Redirect, Post, Body } from '@nestjs/co
 import { RecordsService } from './records.service';
 import { UploadRecordDto } from './dto/upload-record.dto';
 import { UpdateRecordDto } from './dto/update-record.dto';
+import { Resolver, Query, ResolveField, Args } from '@nestjs/graphql';
+import { Record } from './entities/record.entity';
 
+@Resolver(of => Record)
 @Controller('records')
 export class RecordsController {
     constructor(private readonly recordsService: RecordsService) {};
 
+    @Query(returns => Record)
     @Get()
     @Render('home')
     showAllRecords(): any {

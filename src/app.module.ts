@@ -6,6 +6,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Record } from './records/entities/record.entity';
 // import 'dotenv/config';
 import { ConfigModule } from '@nestjs/config';
+import { GraphQLModule } from '@nestjs/graphql';
+import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 
 @Module({
   imports: [
@@ -23,6 +25,9 @@ import { ConfigModule } from '@nestjs/config';
       database: process.env.DB_DBNAME,
       entities: [Record],
       synchronize: true, // shouldn't be used in production
+    }),
+    GraphQLModule.forRoot<ApolloDriverConfig>({ // Playground: http://localhost:4000/graphql
+      driver: ApolloDriver,
     })
   ],
   controllers: [AppController],
