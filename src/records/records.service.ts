@@ -6,27 +6,10 @@ import axios from "axios";
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
-/* let records: Record[] = [
-    {
-        index: 1,
-        sentence: "test1",
-        translated: "테스트1",
-        source: "https://yahoo.co.jp",
-        uploaded: new Date(),
-    },
-    {
-        index: 2,
-        sentence: "test2",
-        translated: "테스트2",
-        source: "https://yahoo.co.uk",
-        uploaded: new Date(),
-    },    
-]; */
-
 interface Plans {
     showAllRecords(): any;
-    // getUploadRecord(): any;
-    // postUploadRecord(record: UploadRecordDto): any;
+    getUploadRecord(): any;
+    postUploadRecord(record: UploadRecordDto): any;
     // getEditRecord(index: number): any;
     // postEditRecord(index: number, record: UpdateRecordDto): any;
     // getDeleteRecord(index: number): any;
