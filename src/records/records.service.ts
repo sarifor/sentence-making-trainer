@@ -39,8 +39,9 @@ export class RecordsService implements Plans {
         private recordsRepository: Repository<Record>,
     ) {}
 
-    showAllRecords(): Promise<Record[]> {
-        return this.recordsRepository.find();
+    async showAllRecords(): Promise<any> {
+        const records = await this.recordsRepository.find();
+        return { records: records };
     };
 
     getUploadRecord(): any {
