@@ -32,7 +32,7 @@ export class RecordsService implements Plans {
         console.log("getUploadRecord");
     };
 
-    async postUploadRecord(record: UploadRecordDto) {
+    async postUploadRecord(record: UploadRecordDto): Promise<UploadRecordDto> {
         // Papago API로, record.sentence(영어)를 한국어로 번역
         const api_url = "https://openapi.naver.com/v1/papago/n2mt";
         const client_id = process.env.CLIENT_ID;
@@ -49,12 +49,7 @@ export class RecordsService implements Plans {
 
             console.log("here");
 
-            return this.recordsRepository.insert({
-                translated,
-                // index: records.length + 1, // how to retrieve repository size?
-                uploaded: new Date(),
-                ...record
-            });
+            return await this.recordsRepository.insert(record);
         } catch (e) {
             console.log(e);
         };

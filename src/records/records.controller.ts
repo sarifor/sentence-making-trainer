@@ -2,7 +2,7 @@ import { Controller, Get, Render, Param, Redirect, Post, Body } from '@nestjs/co
 import { RecordsService } from './records.service';
 import { UploadRecordDto } from './dto/upload-record.dto';
 import { UpdateRecordDto } from './dto/update-record.dto';
-import { Resolver, Query, ResolveField, Args } from '@nestjs/graphql';
+import { Resolver, Query, ResolveField, Args, Mutation } from '@nestjs/graphql';
 import { Record } from './entities/record.entity';
 import { RecordsOutput } from './dto/show-records.dto';
 
@@ -18,19 +18,20 @@ export class RecordsController {
         return this.recordsService.showAllRecords();
     };
 
-    /* @Get('/upload')
+    @Get('/upload')
     @Render('upload')
     getUploadRecord(): any {
         return this.recordsService.getUploadRecord();
     };
 
+    @Mutation(returns => UploadRecordDto)
     @Post('/upload')
     @Redirect('/records')
-    postUploadRecord(@Body() record: UploadRecordDto): any {
+    postUploadRecord(@Body() record: UploadRecordDto): Promise<UploadRecordDto> {
         return this.recordsService.postUploadRecord(record);
     };    
 
-    @Get('/:index/edit')
+    /* @Get('/:index/edit')
     @Render('edit')
     getEditRecord(@Param('index') index: number): any {
         return this.recordsService.getEditRecord(index);
