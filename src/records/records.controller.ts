@@ -4,6 +4,7 @@ import { UploadRecordDto } from './dto/upload-record.dto';
 import { UpdateRecordDto } from './dto/update-record.dto';
 import { Resolver, Query, ResolveField, Args } from '@nestjs/graphql';
 import { Record } from './entities/record.entity';
+import { RecordsOutput } from './dto/show-records.dto';
 
 @Resolver(of => Record)
 @Controller('records')
@@ -15,10 +16,10 @@ export class RecordsController {
         return 'hi';
     }
 
-    @Query(returns => String)
+    @Query(returns => RecordsOutput)
     @Get()
     @Render('home')
-    showAllRecords(): any {
+    showAllRecords(): Promise<RecordsOutput> {
         return this.recordsService.showAllRecords();
     };
 
