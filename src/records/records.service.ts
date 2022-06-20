@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Record } from './entities/record.entity';
+import { RecordsOutput } from './dto/show-records.dto';
 import { UploadRecordDto } from './dto/upload-record.dto';
 import { UpdateRecordDto } from './dto/update-record.dto';
 import axios from "axios";
@@ -22,7 +23,7 @@ export class RecordsService implements Plans {
         private recordsRepository: Repository<Record>,
     ) {}
 
-    async showAllRecords(): Promise<any> {
+    async showAllRecords(): Promise<RecordsOutput> {
         const records = await this.recordsRepository.find();
         return { records: records };
     };

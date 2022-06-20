@@ -11,15 +11,10 @@ import { RecordsOutput } from './dto/show-records.dto';
 export class RecordsController {
     constructor(private readonly recordsService: RecordsService) {};
 
-    @Query(returns => String)
-    hi() {
-        return 'hi';
-    }
-
     @Query(returns => RecordsOutput)
     @Get()
     @Render('home')
-    showAllRecords(): Promise<RecordsOutput> {
+    showAllRecords(): Promise<RecordsOutput> { // No need to put async/await?
         return this.recordsService.showAllRecords();
     };
 
