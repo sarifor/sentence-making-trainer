@@ -15,13 +15,14 @@ export class RecordsController {
         return 'hi';
     }
 
-    /* @Get()
+    @Query(returns => String)
+    @Get()
     @Render('home')
     showAllRecords(): any {
         return this.recordsService.showAllRecords();
     };
 
-    @Get('/upload')
+    /* @Get('/upload')
     @Render('upload')
     getUploadRecord(): any {
         return this.recordsService.getUploadRecord();
