@@ -1,6 +1,6 @@
-import { Controller, Get, Render, Param, Redirect, Post, Body } from '@nestjs/common';
+import { Controller, Get, Render, Redirect, Post } from '@nestjs/common';
 import { RecordsService } from './records.service';
-import { Resolver, Query, ResolveField, Args, Mutation } from '@nestjs/graphql';
+import { Resolver, Query, Args, Mutation } from '@nestjs/graphql';
 import { Record } from './entities/record.entity';
 import { RecordsOutput } from './dto/show-records.dto';
 import { UploadRecordDtoInput, UploadRecordDtoOutput } from './dto/upload-record.dto';

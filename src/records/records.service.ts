@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { Record } from './entities/record.entity';
 import { RecordsOutput } from './dto/show-records.dto';
+import { UploadRecordDtoInput, UploadRecordDtoOutput } from './dto/upload-record.dto';
 import axios from "axios";
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { UploadRecordDtoInput, UploadRecordDtoOutput } from './dto/upload-record.dto';
 
 interface Plans {
     showAllRecords(): any;
@@ -39,22 +39,24 @@ export class RecordsService implements Plans {
         const query = record.sentence;
 
         try {
+            const lengthOfRepo: number = await this.recordsRepository.count({});
+
             const { data } = await axios.post(
                 api_url,
                 { source: "en", target: "ja", text: query },
                 { headers: { "X-Naver-Client-Id": client_id, "X-Naver-Client-Secret": client_secret, } }
             );
+
             const translated = data.message.result.translatedText;
 
-            console.log("here");
-
             const newRecord = {
-                index: 1, // index: records.length + 1, // how to retrieve repository size?
+                index: lengthOfRepo + 1,
                 sentence: record.sentence,
                 translated: translated,
                 source: record.source,
                 uploaded: new Date(),                
             }
+
 
             await this.recordsRepository.insert(newRecord);
 

@@ -1,8 +1,8 @@
-import { Field, ObjectType, InputType } from '@nestjs/graphql';
+import { InputType, ObjectType, Field } from '@nestjs/graphql';
 
 @InputType()
 export class UploadRecordDtoInput {
-    @Field(type => String)
+    @Field(type => String, { nullable: false })
     sentence: string;
 
     @Field(type => String)
