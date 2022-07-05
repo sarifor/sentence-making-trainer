@@ -1,10 +1,9 @@
 import { Controller, Get, Render, Param, Redirect, Post, Body } from '@nestjs/common';
 import { RecordsService } from './records.service';
-import { UploadRecordDto } from './dto/upload-record.dto';
-import { UpdateRecordDto } from './dto/update-record.dto';
 import { Resolver, Query, ResolveField, Args, Mutation } from '@nestjs/graphql';
 import { Record } from './entities/record.entity';
 import { RecordsOutput } from './dto/show-records.dto';
+import { UploadRecordDtoInput, UploadRecordDtoOutput } from './dto/upload-record.dto';
 
 @Resolver(of => Record)
 @Controller('records')
@@ -24,10 +23,10 @@ export class RecordsController {
         return this.recordsService.getUploadRecord();
     };
 
-    @Mutation(returns => UploadRecordDto)
+    @Mutation(returns => UploadRecordDtoOutput)
     @Post('/upload')
     @Redirect('/records')
-    postUploadRecord(@Body() record: UploadRecordDto): Promise<UploadRecordDto> {
+    async postUploadRecord(@Args('record') record: UploadRecordDtoInput): Promise<UploadRecordDtoOutput> {
         return this.recordsService.postUploadRecord(record);
     };    
 

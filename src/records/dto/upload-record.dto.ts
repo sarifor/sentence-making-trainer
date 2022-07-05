@@ -1,6 +1,19 @@
-import { ObjectType, InputType } from '@nestjs/graphql';
-import { Record } from '../entities/record.entity';
+import { Field, ObjectType, InputType } from '@nestjs/graphql';
 
 @InputType()
-export class UploadRecordDto extends Record {
-};
+export class UploadRecordDtoInput {
+    @Field(type => String)
+    sentence: string;
+
+    @Field(type => String)
+    source: string;
+}
+
+@ObjectType()
+export class UploadRecordDtoOutput {
+    @Field(type => String, { nullable: true })
+    error?: string;
+
+    @Field(type => Boolean)
+    ok: boolean;
+}

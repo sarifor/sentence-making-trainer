@@ -1,19 +1,18 @@
 import { Injectable } from '@nestjs/common';
 import { Record } from './entities/record.entity';
 import { RecordsOutput } from './dto/show-records.dto';
-import { UploadRecordDto } from './dto/upload-record.dto';
-import { UpdateRecordDto } from './dto/update-record.dto';
 import axios from "axios";
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { UploadRecordDtoInput, UploadRecordDtoOutput } from './dto/upload-record.dto';
 
 interface Plans {
     showAllRecords(): any;
     getUploadRecord(): any;
-    postUploadRecord(record: UploadRecordDto): any;
-    getEditRecord(index: number): any;
-    postEditRecord(index: number, record: UpdateRecordDto): any;
-    getDeleteRecord(index: number): any;
+    postUploadRecord(record: UploadRecordDtoInput): any;
+    // getEditRecord(index: number): any;
+    // postEditRecord(index: number, record: UpdateRecordDto): any;
+    // getDeleteRecord(index: number): any;
 };
 
 @Injectable()
@@ -32,7 +31,7 @@ export class RecordsService implements Plans {
         console.log("getUploadRecord");
     };
 
-    async postUploadRecord(record: UploadRecordDto): Promise<UploadRecordDto> {
+    async postUploadRecord(record: UploadRecordDtoInput): Promise<UploadRecordDtoOutput> {
         // Papago API로, record.sentence(영어)를 한국어로 번역
         const api_url = "https://openapi.naver.com/v1/papago/n2mt";
         const client_id = process.env.CLIENT_ID;
@@ -49,13 +48,26 @@ export class RecordsService implements Plans {
 
             console.log("here");
 
-            return await this.recordsRepository.insert(record);
+            const newRecord = {
+                index: 1, // index: records.length + 1, // how to retrieve repository size?
+                sentence: record.sentence,
+                translated: translated,
+                source: record.source,
+                uploaded: new Date(),                
+            }
+
+            await this.recordsRepository.insert(newRecord);
+
+            return {
+                ok: true
+            };
+
         } catch (e) {
             console.log(e);
         };
     };
 
-    async getEditRecord(index: number): Promise<any> {
+    /* async getEditRecord(index: number): Promise<any> {
         try {
             const record: Record = await this.recordsRepository.findOne({
                 where: {
@@ -80,5 +92,5 @@ export class RecordsService implements Plans {
         } catch(e) {
             console.log("No Data Deleted");
         }
-    };
+    }; */
 };
