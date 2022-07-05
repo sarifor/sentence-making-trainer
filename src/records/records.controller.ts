@@ -5,6 +5,7 @@ import { Record } from './entities/record.entity';
 import { RecordsOutput } from './dto/show-records.dto';
 import { UploadRecordDtoInput, UploadRecordDtoOutput } from './dto/upload-record.dto';
 import { EditRecordDtoInput, EditRecordDtoOutput } from './dto/edit-record.dto';
+import { DeleteRecordDtoOutput } from './dto/delete-record.dto';
 
 @Resolver(of => Record)
 @Controller('records')
@@ -44,9 +45,10 @@ export class RecordsController {
         return this.recordsService.postEditRecord(editedRecord);
     };    
 
-    /* @Get('/:index/delete')
+    @Mutation(returns => DeleteRecordDtoOutput)
+    @Get('/:index/delete')
     @Redirect('/records')
-    getDeleteRecord(@Param('index') index: number): any {
+    getDeleteRecord(@Args('index') index: number): Promise<DeleteRecordDtoOutput> {
         return this.recordsService.getDeleteRecord(index);
-    }; */
+    };
 };

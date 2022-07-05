@@ -6,6 +6,7 @@ import axios from "axios";
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { EditRecordDtoInput, EditRecordDtoOutput } from './dto/edit-record.dto';
+import { DeleteRecordDtoOutput } from './dto/delete-record.dto';
 
 interface Plans {
     showAllRecords(): any;
@@ -13,7 +14,7 @@ interface Plans {
     postUploadRecord(record: UploadRecordDtoInput): any;
     getEditRecord(index: number): any;
     postEditRecord(editedRecord: EditRecordDtoInput): any;
-    // getDeleteRecord(index: number): any;
+    getDeleteRecord(index: number): Promise<DeleteRecordDtoOutput>;
 };
 
 @Injectable()
@@ -95,13 +96,17 @@ export class RecordsService implements Plans {
 
     };
 
-    /* async getDeleteRecord(index: number) {
+    async getDeleteRecord(index: number): Promise<DeleteRecordDtoOutput> {
         try {
             await this.recordsRepository.delete({
                 index: index,
             });
+
+            return {
+                ok: true
+            }
         } catch(e) {
             console.log("No Data Deleted");
         }
-    }; */
+    };
 };
