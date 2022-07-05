@@ -1,5 +1,3 @@
-## showAllRecords
-
 ```graphQL
 {
   showAllRecords {
@@ -23,3 +21,17 @@ mutation {
     ok
   }
 }
+```
+
+```graphQL
+mutation {
+  postEditRecord(
+    editedRecord: {
+      index: 21
+      translated: "from graphql"
+    }
+  ) {
+    ok
+  }
+}
+```

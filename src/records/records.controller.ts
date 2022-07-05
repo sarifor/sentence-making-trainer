@@ -1,9 +1,10 @@
-import { Controller, Get, Render, Redirect, Post } from '@nestjs/common';
+import { Controller, Get, Render, Redirect, Post, Param } from '@nestjs/common';
 import { RecordsService } from './records.service';
 import { Resolver, Query, Args, Mutation } from '@nestjs/graphql';
 import { Record } from './entities/record.entity';
 import { RecordsOutput } from './dto/show-records.dto';
 import { UploadRecordDtoInput, UploadRecordDtoOutput } from './dto/upload-record.dto';
+import { EditRecordDtoInput, EditRecordDtoOutput } from './dto/edit-record.dto';
 
 @Resolver(of => Record)
 @Controller('records')
@@ -30,19 +31,20 @@ export class RecordsController {
         return this.recordsService.postUploadRecord(record);
     };    
 
-    /* @Get('/:index/edit')
+    @Get('/:index/edit')
     @Render('edit')
     getEditRecord(@Param('index') index: number): any {
         return this.recordsService.getEditRecord(index);
     };
 
+    @Mutation(returns => EditRecordDtoOutput)
     @Post('/:index/edit')
     @Redirect('/records')
-    postEditRecord(@Param('index') index: number, @Body() record: UpdateRecordDto): any {
-        return this.recordsService.postEditRecord(index, record);
+    postEditRecord(@Args('editedRecord') editedRecord: EditRecordDtoInput): Promise<EditRecordDtoOutput> {
+        return this.recordsService.postEditRecord(editedRecord);
     };    
 
-    @Get('/:index/delete')
+    /* @Get('/:index/delete')
     @Redirect('/records')
     getDeleteRecord(@Param('index') index: number): any {
         return this.recordsService.getDeleteRecord(index);

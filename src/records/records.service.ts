@@ -5,13 +5,14 @@ import { UploadRecordDtoInput, UploadRecordDtoOutput } from './dto/upload-record
 import axios from "axios";
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { EditRecordDtoInput, EditRecordDtoOutput } from './dto/edit-record.dto';
 
 interface Plans {
     showAllRecords(): any;
     getUploadRecord(): any;
     postUploadRecord(record: UploadRecordDtoInput): any;
-    // getEditRecord(index: number): any;
-    // postEditRecord(index: number, record: UpdateRecordDto): any;
+    getEditRecord(index: number): any;
+    postEditRecord(editedRecord: EditRecordDtoInput): any;
     // getDeleteRecord(index: number): any;
 };
 
@@ -69,7 +70,7 @@ export class RecordsService implements Plans {
         };
     };
 
-    /* async getEditRecord(index: number): Promise<any> {
+    async getEditRecord(index: number): Promise<any> {
         try {
             const record: Record = await this.recordsRepository.findOne({
                 where: {
@@ -82,11 +83,19 @@ export class RecordsService implements Plans {
         }
     }
 
-    async postEditRecord(index: number, record: UpdateRecordDto): Promise<any> {
-        await this.recordsRepository.update({ index: index }, record); 
+    async postEditRecord(editedRecord: EditRecordDtoInput): Promise<EditRecordDtoOutput> {
+        try {
+            await this.recordsRepository.update({ index: editedRecord.index }, editedRecord); 
+            return {
+                ok: true
+            }
+        } catch (e) {
+            console.log("No Data Found");
+        }
+
     };
 
-    async getDeleteRecord(index: number) {
+    /* async getDeleteRecord(index: number) {
         try {
             await this.recordsRepository.delete({
                 index: index,
