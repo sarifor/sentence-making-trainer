@@ -9,12 +9,10 @@ import { EditRecordDtoInput, EditRecordDtoOutput } from './dto/edit-record.dto';
 import { DeleteRecordDtoOutput } from './dto/delete-record.dto';
 
 interface Plans {
-    showAllRecords(): any;
-    getUploadRecord(): any;
-    postUploadRecord(record: UploadRecordDtoInput): any;
-    getEditRecord(index: number): any;
-    postEditRecord(editedRecord: EditRecordDtoInput): any;
-    getDeleteRecord(index: number): Promise<DeleteRecordDtoOutput>;
+    showAllRecords(): Promise<RecordsOutput>;
+    uploadRecord(record: UploadRecordDtoInput): Promise<UploadRecordDtoOutput>;
+    editRecord(editedRecord: EditRecordDtoInput): Promise<EditRecordDtoOutput>;
+    deleteRecord(index: number): Promise<DeleteRecordDtoOutput>;
 };
 
 @Injectable()
@@ -25,15 +23,15 @@ export class RecordsService implements Plans {
     ) {}
 
     async showAllRecords(): Promise<RecordsOutput> {
-        const records = await this.recordsRepository.find();
-        return { records: records };
+        try {
+            const records = await this.recordsRepository.find();
+            return { records: records };
+        } catch (e) {
+            console.log("No Data Found"); // would be better to use { ok: false, error: "No Data Found" } like other functions
+        }
     };
 
-    getUploadRecord(): any {
-        console.log("getUploadRecord");
-    };
-
-    async postUploadRecord(record: UploadRecordDtoInput): Promise<UploadRecordDtoOutput> {
+    async uploadRecord(record: UploadRecordDtoInput): Promise<UploadRecordDtoOutput> {
         // Papago API로, record.sentence(영어)를 한국어로 번역
         const api_url = "https://openapi.naver.com/v1/papago/n2mt";
         const client_id = process.env.CLIENT_ID;
@@ -67,36 +65,29 @@ export class RecordsService implements Plans {
             };
 
         } catch (e) {
-            console.log(e);
+            return {
+                ok: false,
+                error: "Can not be uploaded",
+            }
         };
     };
 
-    async getEditRecord(index: number): Promise<any> {
-        try {
-            const record: Record = await this.recordsRepository.findOne({
-                where: {
-                    index: index,
-                },
-            });
-            return { record: record };
-        } catch(e) {
-            console.log("No Data Found");
-        }
-    }
-
-    async postEditRecord(editedRecord: EditRecordDtoInput): Promise<EditRecordDtoOutput> {
+    async editRecord(editedRecord: EditRecordDtoInput): Promise<EditRecordDtoOutput> {
         try {
             await this.recordsRepository.update({ index: editedRecord.index }, editedRecord); 
             return {
                 ok: true
             }
         } catch (e) {
-            console.log("No Data Found");
+            return {
+                ok: false,
+                error: "No Data Found",
+            }
         }
 
     };
 
-    async getDeleteRecord(index: number): Promise<DeleteRecordDtoOutput> {
+    async deleteRecord(index: number): Promise<DeleteRecordDtoOutput> {
         try {
             await this.recordsRepository.delete({
                 index: index,
@@ -106,7 +97,10 @@ export class RecordsService implements Plans {
                 ok: true
             }
         } catch(e) {
-            console.log("No Data Deleted");
+            return {
+                ok: false,
+                error: "No Data Found",
+            }
         }
     };
 };

@@ -14,7 +14,7 @@
 
 ```graphQL
 mutation {
-  postUploadRecord(record: {
+  uploadRecord(record: {
     sentence: "Finally done"
     source: "me"
   }) {
@@ -25,11 +25,21 @@ mutation {
 
 ```graphQL
 mutation {
-  postEditRecord(
+  editRecord(
     editedRecord: {
       index: 21
       translated: "from graphql"
     }
+  ) {
+    ok
+  }
+}
+```
+
+```graphQL
+mutation {
+  deleteRecord(
+    index: 21
   ) {
     ok
   }
