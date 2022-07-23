@@ -72,6 +72,19 @@ export class RecordsService implements Plans {
         };
     };
 
+    async getRecord(index: number): Promise<any> {
+        try {
+            const record: Record = await this.recordsRepository.findOne({
+                where: {
+                    index: index,
+                },
+            });
+            return { record: record };
+        } catch(e) {
+            console.log("No Data Found");
+        }
+    };
+
     async editRecord(editedRecord: EditRecordDtoInput): Promise<EditRecordDtoOutput> {
         try {
             await this.recordsRepository.update({ index: editedRecord.index }, editedRecord); 

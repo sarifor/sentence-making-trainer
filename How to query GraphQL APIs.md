@@ -24,6 +24,20 @@ mutation {
 ```
 
 ```graphQL
+{
+  getRecord(index: 35) {
+    record {
+      index
+      sentence
+      translated
+      source
+      uploaded
+    }
+  }
+}
+```
+
+```graphQL
 mutation {
   editRecord(
     editedRecord: {
