@@ -44,7 +44,6 @@
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^6.1.0",
     "gulp-csso": "^3.0.1",
-    "gulp-sass": "^4.0.2",
     "pg": "^8.7.3",
     "postgres": "^3.2.4",
     "pug": "^3.0.2",
