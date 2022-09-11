@@ -18,6 +18,7 @@ export class RecordsResolver {
 
     @Mutation(returns => UploadRecordDtoOutput)
     async uploadRecord(@Args('record') record: UploadRecordDtoInput): Promise<UploadRecordDtoOutput> {
+        console.log(record);
         return this.recordsService.uploadRecord(record);
     };
 
