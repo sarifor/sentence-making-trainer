@@ -19,7 +19,8 @@ import { join } from 'path';
     RecordsModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'localhost',
+      url: process.env.DATABASE_URL,
+      host: process.env.DB_HOST,
       port: parseInt(process.env.DB_PORT, 10),
       username: process.env.DB_USERNAME,
       password: process.env.DB_PW,
