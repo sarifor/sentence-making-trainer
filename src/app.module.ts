@@ -26,7 +26,10 @@ import { join } from 'path';
       password: process.env.DB_PW,
       database: process.env.DB_DBNAME,
       entities: [Record],
-      synchronize: true, // shouldn't be used in production
+      synchronize: true, // shouldn't be used in production,
+      ssl: {
+        rejectUnauthorized: false
+      }
     }),
     GraphQLModule.forRoot<ApolloDriverConfig>({ // Playground: http://localhost:4000/graphql
       driver: ApolloDriver,
