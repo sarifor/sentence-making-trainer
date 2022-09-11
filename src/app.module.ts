@@ -38,6 +38,8 @@ import { join } from 'path';
         origin: process.env.ORIGIN,
         credential: true,
       },
+      introspection: true,
+      playground: true,
     }),
   ],
   controllers: [AppController],
